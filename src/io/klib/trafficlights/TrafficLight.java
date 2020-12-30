@@ -9,6 +9,8 @@ public class TrafficLight {
 	Light midLight = new Light("Yellow", "Off");
 	Light botLight = new Light("Green", "Off");
 	
+	public TrafficLight() {
+	}
 	
 	//Defining the four different states
 	public void setStop() {
