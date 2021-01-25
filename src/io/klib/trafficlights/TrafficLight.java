@@ -2,55 +2,55 @@ package io.klib.trafficlights;
 
 public class TrafficLight {
 	
-	String state;
+	String trafficLightState;
+	String position;
 	
-	// Different Lights
-	Light topLight = new Light("Red", "Off");
-	Light midLight = new Light("Yellow", "Off");
-	Light botLight = new Light("Green", "Off");
 	
-	public TrafficLight() {
+	public TrafficLight(String position) {
+		this.position = position;
+		this.setStop();
+	}
+	
+	public void goGreen() {
+		this.setGetReady();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.setGo();
+	}
+	
+	public void goRed() {
+		this.setBeAware();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.setStop();
 	}
 	
 	//Defining the four different states
-	public void setStop() {
-		topLight.turnOn();
-		midLight.turnOff();
-		botLight.turnOff();
-		state = "Stop";
+	private void setStop() {
+		trafficLightState = "Stop";
+		System.out.println(position + " set to 'Stop'! Red");
 	}
 	
-	public void setGo() {
-		topLight.turnOff();
-		midLight.turnOff();
-		botLight.turnOn();
-		state = "Go";
+	private void setGo() {
+		trafficLightState = "Go";
+		System.out.println(position + " set to 'Go'! Green");
 	}
 	
-	public void setBeAware() {
-		topLight.turnOff();
-		midLight.turnOn();
-		botLight.turnOff();
-		state = "Be Aware";
+	private void setBeAware() {
+		trafficLightState = "BeAware";
+		System.out.println(position + " set to 'Be Aware'! Yellow");
 	}
 	
-	public void setGetReady() {
-		topLight.turnOn();
-		midLight.turnOn();
-		botLight.turnOff();
-		state = "Get ready";
+	private void setGetReady() {
+		trafficLightState = "GetReady";
+		System.out.println(position + " set to 'Get ready'! Red-Yellow");
 	}
 	
-	public void cycleState() throws InterruptedException {
-		if (state == "Stop") {
-			this.setGetReady();
-			Thread.sleep(1000);
-			this.setGo();
-		} else if (state == "Go") {
-			this.setBeAware();
-			Thread.sleep(1000);
-			this.setStop();
-		}
-	}
 	
 }
